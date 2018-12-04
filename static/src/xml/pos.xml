@@ -4,7 +4,7 @@
     <t t-extend="PosTicket">
         <t t-jquery="t[t-esc='order.name']" t-operation="before">
             <t t-if="widget.pos.config.iface_l10n_es_simplified_invoice and !order.is_to_invoice()">
-                <br/><span>Simplified invoice: </span>
+                <br/><span>Factura No. </span>
             </t>
         </t>
         <t t-jquery="t[t-esc='widget.pos.company.name']" t-operation="after">
@@ -53,23 +53,5 @@
         </t>
     </t>
 
-    <t t-extend="XmlReceipt">
-        <t t-jquery="[t-if='!receipt.company.logo']" t-operation="after">
-            <t t-if="widget.pos.config.iface_l10n_es_simplified_invoice and !order.is_to_invoice()">
-            <br/>
-                Simplified invoice <t t-esc="order.simplified_invoice"/>
-            <br/>
-            </t>
-        </t>
-        <t t-jquery="[t-if='receipt.header']" t-operation="after">
-             <t t-if="order.get_client()">
-                 <br/>
-                    <span class="customer_title">Customer data</span><br />
-                    Name: <t t-esc="order.get_client().name ? order.get_client().name : ''"/><br />
-                    VAT: <t t-esc="order.get_client().vat ? order.get_client().vat : ''"/><br />
-                    Address: <t t-esc="order.get_client().address ? order.get_client().address : ''"/>
-             </t>
-        </t>
-    </t>
 
 </templates>
