@@ -2,11 +2,6 @@
 <templates id="template" xml:space="preserve">
 
     <t t-extend="PosTicket">
-        <t t-jquery="t[t-esc='order.name']" t-operation="before">
-            <t t-if="widget.pos.config.iface_l10n_es_simplified_invoice and !order.is_to_invoice()">
-                <br/><span>Factura No. </span>
-            </t>
-        </t>
         <t t-jquery="t[t-esc='widget.pos.company.name']" t-operation="after">
             <t t-if="widget.pos.company.vat">
                 <br />
