@@ -15,7 +15,7 @@ class PosOrder(models.Model):
     )
 
     @api.model
-    def _simplified_limit_check(self, amount_total, limit=3000):
+    def _simplified_limit_check(self, amount_total, limit=30000000):
         precision_digits = dp.get_precision('Account')(self.env.cr)[1]
         # -1 or 0: amount_total <= limit, simplified
         #       1: amount_total > limit, can not be simplified
@@ -46,6 +46,11 @@ class PosOrder(models.Model):
             pos_order.update({
                 'pos_reference': simplified_invoice_number,
                 'is_l10n_es_simplified_invoice': True,
+            })
+        if pos_order_obj.x_flag_redeban:
+            pos_order.update({
+                'pos_reference': simplified_invoice_number,
+                'is_l10n_es_simplified_invoice': False,
             })
             pos.l10n_es_simplified_invoice_sequence_id.next_by_id()
         return super(PosOrder, self)._process_order(pos_order)
