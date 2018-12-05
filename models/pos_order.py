@@ -47,10 +47,6 @@ class PosOrder(models.Model):
                 'pos_reference': simplified_invoice_number,
                 'is_l10n_es_simplified_invoice': True,
             })
-        if pos_order_obj.x_flag_redeban == False:
-            pos_order.update({
-                'pos_reference': ui_order['name'],
-                'is_l10n_es_simplified_invoice': False,
-            })
+
             pos.l10n_es_simplified_invoice_sequence_id.next_by_id()
         return super(PosOrder, self)._process_order(pos_order)

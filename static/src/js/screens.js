@@ -20,6 +20,8 @@ odoo.define('l10n_es_pos.screens', function (require) {
                     // Force invoice above limit. Online is needed.
                     order.to_invoice = true;
                 }
+            } else {
+              console.log('iface_l10n_es_simplified_invoice esta en modo false');
             }
             this._super(force_validate);
         },
