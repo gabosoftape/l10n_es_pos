@@ -11,6 +11,7 @@ odoo.define('l10n_es_pos.screens', function (require) {
 
     screens.PaymentScreenWidget.include({
         validate_order: function (force_validate) {
+          console.log('iface_l10n_es_simplified_invoice esta en modo true');
             var below_limit = this.pos.get_order().get_total_with_tax() <= this.pos.config.l10n_es_simplified_invoice_limit;
             if (this.pos.config.iface_l10n_es_simplified_invoice) {
                 var order = this.pos.get_order();
