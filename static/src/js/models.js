@@ -67,7 +67,7 @@ odoo.define('l10n_es_pos.models', function (require) {
         },
         set_simple_ord_number: function () {
 
-            this.is_simplified_invoice = false;
+            console.log('esperando nuevo numero de orden');
         },
         get_base_by_tax: function () {
             var base_by_tax = {};
