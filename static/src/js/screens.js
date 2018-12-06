@@ -11,9 +11,10 @@ odoo.define('l10n_es_pos.screens', function (require) {
 
     screens.PaymentScreenWidget.include({
         validate_order: function (force_validate) {
-          console.log('iface_l10n_es_simplified_invoice esta en modo true');
+          console.log('se empieza a validar la orden ');
             var below_limit = this.pos.get_order().get_total_with_tax() <= this.pos.config.l10n_es_simplified_invoice_limit;
             if (this.pos.config.iface_l10n_es_simplified_invoice) {
+              console.log('se entro en el if');
                 var order = this.pos.get_order();
                 if (below_limit) {
                     order.set_simple_inv_number();
@@ -23,6 +24,8 @@ odoo.define('l10n_es_pos.screens', function (require) {
                 }
             } else {
               console.log('iface_l10n_es_simplified_invoice esta en modo false');
+              order.to_invoice = false;
+                console.log('sse valido false');
             }
             this._super(force_validate);
         },
