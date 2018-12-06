@@ -23,6 +23,7 @@ odoo.define('l10n_es_pos.screens', function (require) {
                     order.to_invoice = true;
                 }
             } else {
+              var order = this.pos.get_order();
               console.log('iface_l10n_es_simplified_invoice esta en modo false');
               order.to_invoice = false;
                 console.log('sse valido false');
