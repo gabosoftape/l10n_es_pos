@@ -40,13 +40,21 @@ class PosOrder(models.Model):
         pos_order_obj = self.env['pos.order']
         pos = self.env['pos.session'].browse(
             pos_order.get('pos_session_id')).config_id
+
+        if pos_order_obj.x_flag_redeban:
+            pos_order.update({
+                'pos_reference': pos_order_obj.pos_reference,
+                'is_l10n_es_simplified_invoice': True,
+            })
+
         if pos_order_obj._simplified_limit_check(
                 pos_order.get('amount_total'),
                 pos.l10n_es_simplified_invoice_limit):
             pos_order.update({
                 'pos_reference': simplified_invoice_number,
                 'is_l10n_es_simplified_invoice': True,
+                pos.l10n_es_simplified_invoice_sequence_id.next_by_id()
             })
 
-            pos.l10n_es_simplified_invoice_sequence_id.next_by_id()
+
         return super(PosOrder, self)._process_order(pos_order)
