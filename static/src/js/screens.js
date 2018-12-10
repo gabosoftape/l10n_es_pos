@@ -13,7 +13,7 @@ odoo.define('l10n_es_pos.screens', function (require) {
         validate_order: function (force_validate) {
           console.log('Entramos a la validacion de la orden... ');
             var below_limit = this.pos.get_order().get_total_with_tax() <= this.pos.config.l10n_es_simplified_invoice_limit;
-            if (this.pos.config.iface_l10n_es_simplified_invoice == True) {
+            if (this.pos.config.iface_l10n_es_simplified_invoice == true) {
               console.log('iface_l10n_es_simplified_invoice esta en True por eso haremos lo siguiente ');
                 var order = this.pos.get_order();
                 if (below_limit) {
@@ -22,7 +22,7 @@ odoo.define('l10n_es_pos.screens', function (require) {
                     // Force invoice above limit. Online is needed.
                     order.to_invoice = true;
                 }
-            } else if (this.pos.config.iface_l10n_es_simplified_invoice == False) {
+            } else if (this.pos.config.iface_l10n_es_simplified_invoice == false) {
               var order = this.pos.get_order();
               console.log('iface_l10n_es_simplified_invoice esta en false por eso haremos lo siguiente ');
               order.set_normal_inv_number();
