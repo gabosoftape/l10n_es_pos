@@ -16,8 +16,8 @@ odoo.define('l10n_es_pos.screens', function (require) {
             var lines = this.pos.get_order().get_paymentlines();
 
                 if (lines[0].name === "REDEBAN (COP)") {
-                    console.log(lines[0]);
-                    
+                    console.log(lines[0].name);
+
                 }
 
 
