@@ -24,6 +24,7 @@ odoo.define('l10n_es_pos.screens', function (require) {
                 }
             } else {
               console.log('iface_l10n_es_simplified_invoice esta en false por eso haremos lo siguiente ');
+              order.set_normal_inv_number();
               console.log('Hola mundo xD');
             }
             this._super(force_validate);

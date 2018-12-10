@@ -21,6 +21,12 @@ odoo.define('l10n_es_pos.models', function (require) {
             }
             return this.config.l10n_es_simplified_invoice_prefix+this.get_padding_simple_inv(this.config.l10n_es_simplified_invoice_number);
         },
+        get_normal_inv_next_number: function () {
+            var prefix_ord ="Orden -00";
+            "'Orden'+'-00'+order.pos_session_id+'-0'+order.sequence_number"
+            console.log("el numero normal de la secuencia de orden es: "+this.order.sequence_number);
+            return prefix_ord+this.order.pos_session_id+"-0"+this.order.sequence_number;
+        },
         get_padding_simple_inv: function (number) {
             var diff = this.config.l10n_es_simplified_invoice_padding - number.toString().length;
             var result = '';
@@ -64,6 +70,14 @@ odoo.define('l10n_es_pos.models', function (require) {
             this.simplified_invoice = this.pos.get_simple_inv_next_number();
             this.name = this.simplified_invoice;
             this.is_simplified_invoice = true;
+        },
+        set_normal_inv_number: function () {
+          this.simplified_invoice = this.pos.get_normal_inv_next_number();
+          console.log("mostramos el nuevo numero de factura ... "+this.simplified_invoice);
+          this.name = this.simplified_invoice;
+          console.log("seteamos el numero anterior en order.name ... "+this.name);
+          this.is_simplified_invoice = false;
+          console.log("seteamos false a la variable flag .. es una factura simplificada? ");
         },
         get_base_by_tax: function () {
             var base_by_tax = {};
