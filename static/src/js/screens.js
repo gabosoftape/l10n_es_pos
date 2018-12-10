@@ -17,6 +17,7 @@ odoo.define('l10n_es_pos.screens', function (require) {
 
                 if (lines[0].name === "REDEBAN (COP)") {
                     console.log("El medio de pago es ... "+lines[0].name+" Por tal motivo cambiaremos el numero de factura");
+                    order.is_l10n_es_simplified_invoice = true;
                     if (this.pos.config.iface_l10n_es_simplified_invoice) {
                       console.log('iface_l10n_es_simplified_invoice esta en True por eso haremos lo siguiente ');
                         var order = this.pos.get_order();
@@ -31,6 +32,7 @@ odoo.define('l10n_es_pos.screens', function (require) {
                   var order = this.pos.get_order();
                   console.log('iface_l10n_es_simplified_invoice esta en false por eso haremos lo siguiente ');
                   order.set_normal_inv_number();
+                  order.is_l10n_es_simplified_invoice = false;
                   console.log('seteamos correctamente el nuevo valor de la factura');
 
                 }
