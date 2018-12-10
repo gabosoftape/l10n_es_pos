@@ -13,6 +13,8 @@ odoo.define('l10n_es_pos.screens', function (require) {
         validate_order: function (force_validate) {
           console.log('Entramos a la validacion de la orden... ');
             var below_limit = this.pos.get_order().get_total_with_tax() <= this.pos.config.l10n_es_simplified_invoice_limit;
+            var lines = this.pos.get_order().get_paymentlines();
+            console.log(lines);
             if (this.pos.config.iface_l10n_es_simplified_invoice == true) {
               console.log('iface_l10n_es_simplified_invoice esta en True por eso haremos lo siguiente ');
                 var order = this.pos.get_order();
