@@ -23,11 +23,9 @@ odoo.define('l10n_es_pos.models', function (require) {
             return this.config.l10n_es_simplified_invoice_prefix+this.get_padding_simple_inv(this.config.l10n_es_simplified_invoice_number);
         },
         get_normal_inv_next_number: function () {
-            var prefix_ord = "Orden-"
+            var prefix_ord = "Orden-00"
             var order = this.get_order();
-            if (this.pushed_normal_invoices.indexOf(this.config.l10n_es_simplified_invoice_number_normal) > -1) {
-                ++this.config.l10n_es_simplified_invoice_number_normal;
-            }
+            this.config.l10n_es_simplified_invoice_number_normal++;
             console.log("el numero normal de la secuencia de orden es: "+this.config.l10n_es_simplified_invoice_number_normal);
             return prefix_ord+order.pos_session_id+"-0"+this.config.l10n_es_simplified_invoice_number_normal;
         },
