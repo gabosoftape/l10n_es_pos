@@ -13,6 +13,7 @@ odoo.define('l10n_es_pos.models', function (require) {
         initialize: function (attributes, options) {
             pos_super.initialize.apply(this, arguments);
             this.pushed_simple_invoices = [];
+            this.pushed_normal_invoices = [];
             return this;
         },
         get_simple_inv_next_number: function () {
@@ -23,10 +24,11 @@ odoo.define('l10n_es_pos.models', function (require) {
         },
         get_normal_inv_next_number: function () {
             var prefix_ord ="Orden -00";
-            var sequence_number = 0;
-            sequence_number++;
-            console.log("el numero normal de la secuencia de orden es: "+this.order.sequence_number);
-            return prefix_ord+this.order.pos_session_id+"-0"+sequence_number;
+            if (this.pushed_normal_invoices.indexOf(this.config.l10n_es_simplified_invoice_number_normal) > -1) {
+                ++this.config.l10n_es_simplified_invoice_number_normal;
+            }
+            console.log("el numero normal de la secuencia de orden es: "+this.config.l10n_es_simplified_invoice_number_normal);
+            return prefix_ord+this.order.pos_session_id+"-0"+this.config.l10n_es_simplified_invoice_number_normal;
         },
         get_padding_simple_inv: function (number) {
             var diff = this.config.l10n_es_simplified_invoice_padding - number.toString().length;
@@ -46,6 +48,11 @@ odoo.define('l10n_es_pos.models', function (require) {
                 this.pushed_simple_invoices.push(order.data.simplified_invoice);
                 ++this.config.l10n_es_simplified_invoice_number;
             }
+        },
+        push_normal_invoice: function (order) {
+
+                this.pushed_normal_invoices.push(order.data.simplified_invoice);
+                ++this.config.l10n_es_simplified_invoice_number_normal;
         },
         _flush_orders: function (orders, options) {
             var self = this;
