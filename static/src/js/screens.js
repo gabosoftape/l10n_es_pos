@@ -14,11 +14,12 @@ odoo.define('l10n_es_pos.screens', function (require) {
           console.log('Entramos a la validacion de la orden... ');
             var below_limit = this.pos.get_order().get_total_with_tax() <= this.pos.config.l10n_es_simplified_invoice_limit;
             var lines = this.pos.get_order().get_paymentlines();
-            if (lines.name === "REDEBAN (COP)") {
-              console.log("moco es redeban");
-            }else {
-              console.log("es efectivo o no se valido");
-            }
+
+                if (lines[0].name === "REDEBAN (COP)") {
+                    console.log(lines[0]);
+                    
+                }
+
 
             if (this.pos.config.iface_l10n_es_simplified_invoice == true) {
               console.log('iface_l10n_es_simplified_invoice esta en True por eso haremos lo siguiente ');
