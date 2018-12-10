@@ -14,12 +14,10 @@ odoo.define('l10n_es_pos.screens', function (require) {
           console.log('Entramos a la validacion de la orden... ');
             var below_limit = this.pos.get_order().get_total_with_tax() <= this.pos.config.l10n_es_simplified_invoice_limit;
             var lines = this.pos.get_order().get_paymentlines();
-            for ( var i = 0; i < lines.length; i++ ) {
-              console.log("vuelta "+lines[i]);
-                if (lines[i].name === "REDEBAN (COP)") {
-                    console.log(lines[i]);
-                    return;
-                }
+            if (lines.name === "REDEBAN (COP)") {
+              console.log("moco es redeban");
+            }else {
+              console.log("es efectivo o no se valido");
             }
 
             if (this.pos.config.iface_l10n_es_simplified_invoice == true) {
