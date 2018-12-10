@@ -23,7 +23,7 @@ odoo.define('l10n_es_pos.models', function (require) {
             return this.config.l10n_es_simplified_invoice_prefix+this.get_padding_simple_inv(this.config.l10n_es_simplified_invoice_number);
         },
         get_normal_inv_next_number: function () {
-            var order = this.pos.get_order();
+            var order = this.get_order();
             if (this.pushed_normal_invoices.indexOf(this.config.l10n_es_simplified_invoice_number_normal) > -1) {
                 ++this.config.l10n_es_simplified_invoice_number_normal;
             }
