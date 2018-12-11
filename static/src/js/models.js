@@ -47,15 +47,18 @@ odoo.define('l10n_es_pos.models', function (require) {
             return result;
         },
         push_simple_invoice: function (order) {
+          console.log("pusheamos simple invoice");
             if (this.pushed_simple_invoices.indexOf(order.data.simplified_invoice) === -1) {
                 this.pushed_simple_invoices.push(order.data.simplified_invoice);
                 ++this.config.l10n_es_simplified_invoice_number;
+                console.log("aumentamos secuencia simplified invoice");
             }
         },
         push_normal_invoice: function (order) {
-
+          console.log("pusheamos normal invoice");
                 this.pushed_normal_invoices.push(order.data.simplified_invoice);
                 ++this.config.l10n_es_simplified_invoice_number_normal;
+                console.log("aumentamos secuencia normal invoice");
         },
         _flush_orders: function (orders, options) {
           console.log("entramos a metodo flush");
