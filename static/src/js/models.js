@@ -1,12 +1,12 @@
 /* Copyright 2016 David Gómez Quilón <david.gomez@aselcis.com>
    License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 */
-
+var flag = true;
 odoo.define('l10n_es_pos.models', function (require) {
     "use strict";
 
     var models = require('point_of_sale.models');
-    var flag = true;
+
 
     var pos_super = models.PosModel.prototype;
     models.PosModel = models.PosModel.extend({
