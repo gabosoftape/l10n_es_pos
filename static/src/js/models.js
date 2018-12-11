@@ -58,11 +58,21 @@ odoo.define('l10n_es_pos.models', function (require) {
                 ++this.config.l10n_es_simplified_invoice_number_normal;
         },
         _flush_orders: function (orders, options) {
+          console.log("entramos a metodo flush");
             var self = this;
             // Save pushed orders numbers
             _.each(orders, function (order) {
+              console.log("entramos al comparativo del flush ... each");
                 if (!order.data.to_invoice) {
+                  console.log("entramos al if .. comparando el data");
+                  if (order.to_invoice == true) {
+                    console.log("el order.to invoice es TRUE");
                     self.push_simple_invoice(order);
+                  } else {
+                    console.log("el order.to invoice es FALSE");
+                    self.push_normal_invoice(order);
+                  }
+
                 }
             });
             return pos_super._flush_orders.apply(this, arguments);
