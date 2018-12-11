@@ -6,7 +6,7 @@ odoo.define('l10n_es_pos.models', function (require) {
     "use strict";
 
     var models = require('point_of_sale.models');
-
+    var flag =
 
     var pos_super = models.PosModel.prototype;
     models.PosModel = models.PosModel.extend({
@@ -65,7 +65,7 @@ odoo.define('l10n_es_pos.models', function (require) {
               console.log("entramos al comparativo del flush ... each");
                 if (!order.data.to_invoice) {
                   console.log("entramos al if .. comparando el data");
-                  if (this.is_simplified_invoice == true) {
+                  if (self.is_simplified_invoice == true) {
                     console.log("el simplified invoice es TRUE");
                     self.push_simple_invoice(order);
                   } else {
