@@ -65,11 +65,11 @@ odoo.define('l10n_es_pos.models', function (require) {
               console.log("entramos al comparativo del flush ... each");
                 if (!order.data.to_invoice) {
                   console.log("entramos al if .. comparando el data");
-                  if (order.to_invoice == true) {
-                    console.log("el order.to invoice es TRUE");
+                  if (this.is_simplified_invoice == true) {
+                    console.log("el simplified invoice es TRUE");
                     self.push_simple_invoice(order);
                   } else {
-                    console.log("el order.to invoice es FALSE");
+                    console.log("el simplified invoice es FALSE");
                     self.push_normal_invoice(order);
                   }
 
