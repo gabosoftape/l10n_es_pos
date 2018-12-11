@@ -6,7 +6,7 @@ odoo.define('l10n_es_pos.models', function (require) {
     "use strict";
 
     var models = require('point_of_sale.models');
-    var flag =
+    var flag = true;
 
     var pos_super = models.PosModel.prototype;
     models.PosModel = models.PosModel.extend({
@@ -65,7 +65,7 @@ odoo.define('l10n_es_pos.models', function (require) {
               console.log("entramos al comparativo del flush ... each");
                 if (!order.data.to_invoice) {
                   console.log("entramos al if .. comparando el data");
-                  if (self.is_simplified_invoice == true) {
+                  if (flag == true) {
                     console.log("el simplified invoice es TRUE");
                     self.push_simple_invoice(order);
                   } else {
@@ -91,6 +91,7 @@ odoo.define('l10n_es_pos.models', function (require) {
             this.simplified_invoice = this.pos.get_simple_inv_next_number();
             this.name = this.simplified_invoice;
             this.is_simplified_invoice = true;
+            flag = true;
         },
         set_normal_inv_number: function () {
           this.simplified_invoice = this.pos.get_normal_inv_next_number();
@@ -99,6 +100,7 @@ odoo.define('l10n_es_pos.models', function (require) {
           console.log("seteamos el numero anterior en order.name ... "+this.name);
           this.is_simplified_invoice = false;
           console.log("seteamos false a la variable flag .. es una factura simplificada? ");
+          flag = false;
         },
         get_base_by_tax: function () {
             var base_by_tax = {};
