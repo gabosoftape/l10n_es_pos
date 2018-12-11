@@ -27,9 +27,9 @@ odoo.define('l10n_es_pos.models', function (require) {
             return this.config.l10n_es_simplified_invoice_prefix+this.get_padding_simple_inv(this.config.l10n_es_simplified_invoice_number);
         },
         get_normal_inv_next_number: function () {
+          console.log("entramos al get numero siguiente");
             var prefix_ord = "Orden-00"
             var order = this.get_order();
-            this.config.l10n_es_simplified_invoice_number_normal++;
             console.log("el numero normal de la secuencia de orden es: "+this.config.l10n_es_simplified_invoice_number_normal);
             return prefix_ord+order.pos_session_id+"-0"+this.config.l10n_es_simplified_invoice_number_normal;
         },
@@ -97,6 +97,7 @@ odoo.define('l10n_es_pos.models', function (require) {
             flag = true;
         },
         set_normal_inv_number: function () {
+          console.log("entramos al metodo set normal");
           this.simplified_invoice = this.pos.get_normal_inv_next_number();
           console.log("mostramos el nuevo numero de factura ... "+this.simplified_invoice);
           this.name = this.simplified_invoice;
