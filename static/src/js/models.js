@@ -18,7 +18,9 @@ odoo.define('l10n_es_pos.models', function (require) {
         },
         get_simple_inv_next_number: function () {
             if (this.pushed_simple_invoices.indexOf(this.config.l10n_es_simplified_invoice_number) > -1) {
+              console.log("aqui se obtuvo (get simple inv next number).."+this.config.l10l10n_es_simplified_invoice_number);
                 ++this.config.l10n_es_simplified_invoice_number;
+                console.log("aqui se aumento ? "+this.config.l10n_es_simplified_invoice_number_normal);
             }
             return this.config.l10n_es_simplified_invoice_prefix+this.get_padding_simple_inv(this.config.l10n_es_simplified_invoice_number);
         },
