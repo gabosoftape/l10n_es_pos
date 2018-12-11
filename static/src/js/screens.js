@@ -22,6 +22,7 @@ odoo.define('l10n_es_pos.screens', function (require) {
                         var order = this.pos.get_order();
                         if (below_limit) {
                             order.set_simple_inv_number();
+                            console.log("seteamos el numero de factura");
                         } else {
                             // Force invoice above limit. Online is needed.
                             order.to_invoice = true;
