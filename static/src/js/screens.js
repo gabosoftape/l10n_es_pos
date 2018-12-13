@@ -15,7 +15,7 @@ odoo.define('l10n_es_pos.screens', function (require) {
             var below_limit = this.pos.get_order().get_total_with_tax() <= this.pos.config.l10n_es_simplified_invoice_limit;
             var lines = this.pos.get_order().get_paymentlines();
 
-                if (lines[0].name === "REDEBAN (COP)") {
+                if (lines[0].name.includes("REDEBAN")) {
                     console.log("El medio de pago es ... "+lines[0].name+" Por tal motivo cambiaremos el numero de factura");
                     if (this.pos.config.iface_l10n_es_simplified_invoice) {
                       console.log('iface_l10n_es_simplified_invoice esta en True por eso haremos lo siguiente ');
