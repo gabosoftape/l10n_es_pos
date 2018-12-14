@@ -106,6 +106,12 @@ odoo.define('l10n_es_pos.models', function (require) {
           console.log("seteamos false a la variable flag .. es una factura simplificada? ");
           flag = false;
         },
+        sumarDias: function(fecha, dias){
+          fecha.setDate(fecha.getDate() + dias);
+          return fecha;
+
+
+        },
         get_base_by_tax: function () {
             var base_by_tax = {};
             this.get_orderlines().forEach(function (line) {
