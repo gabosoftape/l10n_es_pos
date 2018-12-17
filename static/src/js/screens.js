@@ -39,6 +39,7 @@ odoo.define('l10n_es_pos.screens', function (require) {
 
                 }
             } else {
+              console.log("!!!!!!!!!existen 2 o mas medios de pago .. por tal motivo haremos lo siguiente.");
               if (this.pos.config.iface_l10n_es_simplified_invoice) {
                 console.log('iface_l10n_es_simplified_invoice esta en True por eso haremos lo siguiente ');
                   var order = this.pos.get_order();
@@ -52,7 +53,7 @@ odoo.define('l10n_es_pos.screens', function (require) {
                       order.to_invoice = true;
                   }
                 }
-            }    
+            }
             this._super(force_validate);
         },
     });
