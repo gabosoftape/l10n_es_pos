@@ -1,7 +1,19 @@
 /* Copyright 2016 David Gómez Quilón <david.gomez@aselcis.com>
    License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 */
+var time = require('web.time');
+var utils = require('web.utils');
 var flag = true;
+var caducidad_coupon1 = undefined;
+var caducidad_coupon2 = undefined;
+var field_utils = require('web.field_utils');
+
+function validar_cupones () {
+  var actual_fecha = field_utils.format.datetime(
+      moment(this.validation_date), {}, {timezone: false});
+  console.log(actual_fecha);
+}
+
 odoo.define('l10n_es_pos.models', function (require) {
     "use strict";
 
@@ -48,6 +60,8 @@ odoo.define('l10n_es_pos.models', function (require) {
         },
         push_simple_invoice: function (order) {
           console.log("pusheamos simple invoice");
+          validar_cupones();
+
             if (this.pushed_simple_invoices.indexOf(order.data.simplified_invoice) === -1) {
                 this.pushed_simple_invoices.push(order.data.simplified_invoice);
                 ++this.config.l10n_es_simplified_invoice_number;
@@ -56,6 +70,7 @@ odoo.define('l10n_es_pos.models', function (require) {
         },
         push_normal_invoice: function (order) {
           console.log("pusheamos normal invoice");
+          validar_cupones();
                 this.pushed_normal_invoices.push(order.data.simplified_invoice);
                 ++this.config.l10n_es_simplified_invoice_number_normal;
                 console.log("aumentamos secuencia normal invoice");
