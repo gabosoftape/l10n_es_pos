@@ -10,11 +10,13 @@ odoo.define('l10n_es_pos.models', function (require) {
     var caducidad_coupon2 = undefined;
     var field_utils = require('web.field_utils');
 
+
     function validar_cupones () {
+      var fecha= new Date();
       var actual_fecha = field_utils.format.datetime(
-          moment(this.validation_date), {}, {timezone: false});
+          moment(fecha), {}, {timezone: false});
       console.log(actual_fecha);
-    }    
+    }
     models.PosModel = models.PosModel.extend({
         initialize: function (attributes, options) {
             pos_super.initialize.apply(this, arguments);
