@@ -19,13 +19,16 @@ odoo.define('l10n_es_pos.screens', function (require) {
                 if (lines[0].name.includes("REDEBAN")) {
                     console.log("El medio de pago es ... "+lines[0].name+" Por tal motivo cambiaremos el numero de factura");
                     try {
+                      console.log("actualmente existen "+lines.length + " medios de pago");
                       if (lines[1].name != null){
                         console.log("ademas de "+lines[1].name);
+                      }else {
+                        console.log("solo hay un mdio de pago");
                       }
                     } catch (e) {
                       console.log(e);
                     } finally {
-                      
+
                     }
 
                     if (this.pos.config.iface_l10n_es_simplified_invoice) {
