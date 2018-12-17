@@ -1,24 +1,20 @@
 /* Copyright 2016 David Gómez Quilón <david.gomez@aselcis.com>
    License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 */
-var flag = true;
-var caducidad_coupon1 = undefined;
-var caducidad_coupon2 = undefined;
-var field_utils = require('web.field_utils');
-
-function validar_cupones () {
-  var actual_fecha = field_utils.format.datetime(
-      moment(this.validation_date), {}, {timezone: false});
-  console.log(actual_fecha);
-}
-
 odoo.define('l10n_es_pos.models', function (require) {
     "use strict";
-
     var models = require('point_of_sale.models');
-
-
     var pos_super = models.PosModel.prototype;
+    var flag = true;
+    var caducidad_coupon1 = undefined;
+    var caducidad_coupon2 = undefined;
+    var field_utils = require('web.field_utils');
+
+    function validar_cupones () {
+      var actual_fecha = field_utils.format.datetime(
+          moment(this.validation_date), {}, {timezone: false});
+      console.log(actual_fecha);
+    }    
     models.PosModel = models.PosModel.extend({
         initialize: function (attributes, options) {
             pos_super.initialize.apply(this, arguments);
