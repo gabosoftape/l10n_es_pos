@@ -1,8 +1,6 @@
 /* Copyright 2016 David Gómez Quilón <david.gomez@aselcis.com>
    License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 */
-var time = require('web.time');
-var utils = require('web.utils');
 var flag = true;
 var caducidad_coupon1 = undefined;
 var caducidad_coupon2 = undefined;
