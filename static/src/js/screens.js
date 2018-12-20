@@ -83,7 +83,7 @@ odoo.define('l10n_es_pos.screens', function (require) {
                 }
             }
             this._super(force_validate);
-        },
+        }
     });
 
 });
