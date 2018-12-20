@@ -31,7 +31,7 @@ odoo.define('l10n_es_pos.screens', function (require) {
                             order.to_invoice = true;
                         }
                       }
-                } else if (lines[0].name =="REDEBAN BPI (COP)")) {
+                } else if (lines[0].name =="REDEBAN BPI (COP)") {
                     if (this.pos.config.iface_l10n_es_simplified_invoice) {
                       console.log('iface_l10n_es_simplified_invoice esta en True por eso haremos lo siguiente ');
                         var order = this.pos.get_order();
@@ -45,7 +45,7 @@ odoo.define('l10n_es_pos.screens', function (require) {
                             order.to_invoice = true;
                         }
                       }
-                }else if (lines[0].name ==("REDEBAN VENECIA (COP)")) {
+                }else if (lines[0].name =="REDEBAN VENECIA (COP)") {
                     if (this.pos.config.iface_l10n_es_simplified_invoice) {
                       console.log('iface_l10n_es_simplified_invoice esta en True por eso haremos lo siguiente ');
                         var order = this.pos.get_order();
