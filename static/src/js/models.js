@@ -78,18 +78,26 @@ odoo.define('l10n_es_pos.models', function (require) {
             // Save pushed orders numbers
             _.each(orders, function (order) {
               console.log("entramos al comparativo del flush ... each");
-              console.log(lines[0].name + "hhhhhhhhhhhhhhhhhhhhhhhhh")
+              // console.log(lines[0].name + "hhhhhhhhhhhhhhhhhhhhhhhhh")
                 if (!order.data.to_invoice) {
                   console.log("entramos al if |no es una factura| .. comparando el data");
-                  if (flag == true) {
-                    console.log("el simplified invoice es TRUE");
+                  if (lines.length<=1) {
+                    console.log("solo hay un medio de pago");
+                  if (lines[0].name =="REDEBAN BCM (COP)") {
+                      self.push_simple_invoice(order);
+                  } else if (lines[0].name =="REDEBAN BPI (COP)") {
+                    self.push_simple_invoice(order);
+                  }else if (lines[0].name =="REDEBAN VENECIA (COP)") {
                     self.push_simple_invoice(order);
                   } else {
-                    console.log("el simplified invoice es FALSE");
                     self.push_normal_invoice(order);
                   }
+              } else {
+                console.log("!!!!!!!!!existen 2 o mas medios de pago .. por tal motivo haremos lo siguiente.");
+                self.push_simple_invoice(order);
+              }
 
-                }
+            }
             });
             return pos_super._flush_orders.apply(this, arguments);
         },
@@ -104,9 +112,13 @@ odoo.define('l10n_es_pos.models', function (require) {
             return total;
         },
         set_simple_inv_number: function () {
+          console.log("entramos al metodo set normal");
             this.simplified_invoice = this.pos.get_simple_inv_next_number();
+          console.log("mostramos el nuevo numero de factura ... "+this.simplified_invoice);
             this.name = this.simplified_invoice;
+          console.log("seteamos el numero anterior en order.name ... "+this.name);
             this.is_simplified_invoice = true;
+          console.log("seteamos false a la variable flag .. es una factura simplificada? ");
             flag = true;
         },
         set_normal_inv_number: function () {
