@@ -112,7 +112,7 @@ odoo.define('l10n_es_pos.models', function (require) {
             return total;
         },
         set_simple_inv_number: function () {
-          console.log("entramos al metodo set normal");
+          console.log("entramos al metodo set simple");
             this.simplified_invoice = this.pos.get_simple_inv_next_number();
           console.log("mostramos el nuevo numero de factura ... "+this.simplified_invoice);
             this.name = this.simplified_invoice;
