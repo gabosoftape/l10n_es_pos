@@ -84,16 +84,21 @@ odoo.define('l10n_es_pos.models', function (require) {
                   if (lines.length<=1) {
                     console.log("solo hay un medio de pago");
                   if (lines[0].name =="REDEBAN BCM (COP)") {
+                      console.log("token BCM COP");
                       self.push_simple_invoice(order);
                   } else if (lines[0].name =="REDEBAN BPI (COP)") {
+                    console.log("token BPI COP");
                     self.push_simple_invoice(order);
                   }else if (lines[0].name =="REDEBAN VENECIA (COP)") {
                     self.push_simple_invoice(order);
+                    console.log("token venecia COP");
                   } else {
+                    console.log("token EFECTIVO");
                     self.push_normal_invoice(order);
                   }
               } else {
                 console.log("!!!!!!!!!existen 2 o mas medios de pago .. por tal motivo haremos lo siguiente.");
+                console.log("token REDEBAN obligado");
                 self.push_simple_invoice(order);
               }
 
