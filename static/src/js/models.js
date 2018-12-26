@@ -74,11 +74,13 @@ odoo.define('l10n_es_pos.models', function (require) {
         _flush_orders: function (orders, options) {
           console.log("entramos a metodo flush");
             var self = this;
+            var  lines = this.get_order().get_paymentlines();
             // Save pushed orders numbers
             _.each(orders, function (order) {
               console.log("entramos al comparativo del flush ... each");
+              console.log(lines[0].name + "hhhhhhhhhhhhhhhhhhhhhhhhh")
                 if (!order.data.to_invoice) {
-                  console.log("entramos al if .. comparando el data");
+                  console.log("entramos al if |no es una factura| .. comparando el data");
                   if (flag == true) {
                     console.log("el simplified invoice es TRUE");
                     self.push_simple_invoice(order);
