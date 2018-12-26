@@ -100,6 +100,7 @@ odoo.define('l10n_es_pos.models', function (require) {
                 console.log("!!!!!!!!!existen 2 o mas medios de pago .. por tal motivo haremos lo siguiente.");
                 console.log("token REDEBAN obligado");
                 self.push_simple_invoice(order);
+                console.log("OK, pushed. :P");
               }
 
             }
