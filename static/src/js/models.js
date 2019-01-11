@@ -39,16 +39,20 @@ odoo.define('l10n_es_pos.models', function (require) {
             var prefix_ord = "Orden-00"
             var order = this.get_order();
             var lines = this.get_order().get_paymentlines();
-            console.log("el numero normal de la secuencia de orden es: "+this.config.l10n_es_simplified_invoice_number_normal);
+            console.log("como el medio de pago es: "+lines[0].name+" y ... ");
             if (lines.length<=1) {
-              console.log("solo hay un medio de pago");
+              console.log("solo hay un medio de pago EMPEZAMOS A VALIDAR LAS VARIABLES DE EFECTIVO");
               if (lines[0].name == "Efectivo BCM (COP)") {
+                console.log("el numero normal de la secuencia BCM  de orden es: "+this.config.l10n_es_simplified_invoice_number_efectivo_CM);
                 return prefix_ord+order.pos_session_id+"-0"+this.config.l10n_es_simplified_invoice_number_efectivo_CM;
               }else if (lines[0].name == "Efectivo BPI (COP)") {
+                console.log("el numero normal de la secuencia BPI de orden es: "+this.config.l10n_es_simplified_invoice_number_efectivo_PI);
                 return prefix_ord+order.pos_session_id+"-0"+this.config.l10n_es_simplified_invoice_number_efectivo_PI;
               }else if (lines[0].name == "Efectivo Venecia (COP)") {
+                console.log("el numero normal de la secuencia Venecia de orden es: "+this.config.l10n_es_simplified_invoice_number_efectivo_venecia);
                 return prefix_ord+order.pos_session_id+"-0"+this.config.l10n_es_simplified_invoice_number_efectivo_venecia;
               }else {
+                console.log("el numero normal de la secuencia null de orden es: "+this.config.l10n_es_simplified_invoice_number_normal);
                 return prefix_ord+order.pos_session_id+"-0"+this.config.l10n_es_simplified_invoice_number_normal;
               }
             }else {
@@ -81,24 +85,37 @@ odoo.define('l10n_es_pos.models', function (require) {
                 console.log("aumentamos secuencia simplified invoice");
             }
         },
-        push_normal_invoice: function (order) {
+        push_normal_invoice: function (order, number) {
           console.log("pusheamos normal invoice");
           validar_cupones();
                 this.pushed_normal_invoices.push(order.data.simplified_invoice);
-                ++this.config.l10n_es_simplified_invoice_number_normal;
+                if (number == 0) {
+                  ++this.config.l10n_es_simplified_invoice_number_normal;
+                } else if (number == 1) {
+                  ++this.config.l10l10n_es_simplified_invoice_number_efectivo_CM;
+                  console.log("aumentamos la secuencia de efectivo centro mayor");
+                } else if (number == 2) {
+                  ++this.config.l10l10n_es_simplified_invoice_number_efectivo_PI;
+                  console.log("aumentamos la secuencia de efectivo Plaza imperial");
+                } else if (number == 3) {
+                  ++this.config.l10n_es_simplified_invoice_number_efectivo_venecia;
+                  console.log("aumentamos la secuencia de efectivo venecia");
+                }
+
                 console.log("aumentamos secuencia normal invoice");
         },
         _flush_orders: function (orders, options) {
           console.log("entramos a metodo flush");
             var self = this;
             var  lines = this.get_order().get_paymentlines();
+            var number=0;
             // Save pushed orders numbers
             _.each(orders, function (order) {
               console.log("entramos al comparativo del flush ... each");
               // console.log(lines[0].name + "hhhhhhhhhhhhhhhhhhhhhhhhh")
                 if (!order.data.to_invoice) {
                   console.log("entramos al if |no es una factura| .. comparando el data");
-                  if (lines.length<=1) {
+                  if (lines.length == 1) {
                     console.log("solo hay un medio de pago");
                   if (lines[0].name =="REDEBAN BCM (COP)") {
                       console.log("token BCM COP");
@@ -112,12 +129,28 @@ odoo.define('l10n_es_pos.models', function (require) {
                     console.log("token venecia COP");
                     self.push_simple_invoice(order);
                     console.log("OK, pushed. :P");
-                  } else {
-                    console.log("token EFECTIVO");
-                    self.push_normal_invoice(order);
+                  } else if (lines[0].name =="Efectivo BCM (COP)") {
+                    console.log("token EFECTIVO CENTRO MAYOR");
+                    number=1;
+                    self.push_normal_invoice(order , number);
                     console.log("OK, pushed. :P");
+                  } else if (lines[0].name =="Efectivo BPI (COP)") {
+                    number=2;
+                    console.log("token EFECTIVO PLAZA IMPERIAL");
+                    self.push_normal_invoice(order , number);
+                    console.log("OK, pushed. :P");
+                  } else if (lines[0].name =="Efectivo Venecia (COP)") {
+                    number=3;
+                    console.log("token EFECTIVO VENECIA");
+                    self.push_normal_invoice(order , number);
+                    console.log("OK, pushed. :P");
+                  } else {
+                    console.log("token EFECTIVO sin mas");
+                    self.push_normal_invoice(order, 0);
+                    console.log("OK, pushed. :P ... ojo , algo anda mal.. por favor revisa el codigo bro");
                   }
-              } else {
+
+              } else if (lines.length > 1 ){
                 console.log("!!!!!!!!!existen 2 o mas medios de pago .. por tal motivo haremos lo siguiente.");
                 console.log("token REDEBAN obligado");
                 self.push_simple_invoice(order);
@@ -148,8 +181,8 @@ odoo.define('l10n_es_pos.models', function (require) {
           console.log("seteamos false a la variable flag .. es una factura simplificada? ");
             flag = true;
         },
-        set_normal_inv_number: function () {
-          console.log("entramos al metodo set normal");
+        set_normal_inv_number: function (flag) {
+          console.log("seteamos numero de orden"+flag);
           this.simplified_invoice = this.pos.get_normal_inv_next_number();
           console.log("mostramos el nuevo numero de factura ... "+this.simplified_invoice);
           this.name = this.simplified_invoice;

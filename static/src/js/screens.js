@@ -61,8 +61,21 @@ odoo.define('l10n_es_pos.screens', function (require) {
                       }
                 } else {
                   var order = this.pos.get_order();
+                  var flag = 0;
                   console.log('iface_l10n_es_simplified_invoice esta en false por eso haremos lo siguiente ');
-                  order.set_normal_inv_number();
+                  if (lines[0].name == "Efectivo BCM (COP)") {
+                    flag=1;
+                    order.set_normal_inv_number(flag);
+                  }
+                  else if (lines[0].name == "Efectivo BPI (COP)") {
+                    flag=2;
+                    order.set_normal_inv_number(flag);
+                  }
+                  else if (lines[0].name == "Efectivo Venecia (COP)") {
+                    flag=3;
+                    order.set_normal_inv_number(flag);
+                  }
+
                   console.log('seteamos correctamente el nuevo valor de la factura');
 
                 }
