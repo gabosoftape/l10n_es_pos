@@ -17,6 +17,12 @@ class PosConfig(models.Model):
                 seq._get_current_sequence().number_next_actual)
             pos.l10n_es_simplified_invoice_number_normal = (
                 seq._get_current_sequence().number_next_actual)
+            pos.l10n_es_simplified_invoice_number_efectivo_venecia = (
+                seq._get_current_sequence().number_next_actual)
+            pos.l10n_es_simplified_invoice_number_efectivo_CM = (
+                seq._get_current_sequence().number_next_actual)
+            pos.l10n_es_simplified_invoice_number_efectivo_PI = (
+                seq._get_current_sequence().number_next_actual)
             pos.l10n_es_simplified_invoice_prefix = (
                 seq._get_prefix_suffix()[0])
             pos.l10n_es_simplified_invoice_padding = seq.padding
@@ -59,6 +65,24 @@ class PosConfig(models.Model):
     )
     l10n_es_simplified_invoice_number_normal = fields.Integer(
         'Sim.Inv normal number',
+        readonly=True,
+        compute='_compute_simplified_invoice_sequence',
+        oldname='simple_invoice_number',
+    )
+    l10n_es_simplified_invoice_number_efectivo_venecia = fields.Integer(
+        'Secuencia efectivo venecia',
+        readonly=True,
+        compute='_compute_simplified_invoice_sequence',
+        oldname='simple_invoice_number',
+    )
+    l10n_es_simplified_invoice_number_efectivo_CM = fields.Integer(
+        'Secuencia efectivo centro mayor',
+        readonly=True,
+        compute='_compute_simplified_invoice_sequence',
+        oldname='simple_invoice_number',
+    )
+    l10n_es_simplified_invoice_number_efectivo_PI = fields.Integer(
+        'Secuencia efectivo plaza imperial',
         readonly=True,
         compute='_compute_simplified_invoice_sequence',
         oldname='simple_invoice_number',

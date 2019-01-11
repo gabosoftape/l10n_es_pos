@@ -35,11 +35,28 @@ odoo.define('l10n_es_pos.models', function (require) {
             return this.config.l10n_es_simplified_invoice_prefix+this.get_padding_simple_inv(this.config.l10n_es_simplified_invoice_number);
         },
         get_normal_inv_next_number: function () {
-          console.log("entramos al get numero siguiente");
+          console.log("entramos al get numero siguiente para ordenes en efectivo");
             var prefix_ord = "Orden-00"
             var order = this.get_order();
+            var lines = this.get_order().get_paymentlines();
             console.log("el numero normal de la secuencia de orden es: "+this.config.l10n_es_simplified_invoice_number_normal);
-            return prefix_ord+order.pos_session_id+"-0"+this.config.l10n_es_simplified_invoice_number_normal;
+            if (lines.length<=1) {
+              console.log("solo hay un medio de pago");
+              if (lines[0].name == "Efectivo BCM (COP)") {
+                return prefix_ord+order.pos_session_id+"-0"+this.config.l10n_es_simplified_invoice_number_efectivo_CM;
+              }else if (lines[0].name == "Efectivo BPI (COP)") {
+                return prefix_ord+order.pos_session_id+"-0"+this.config.l10n_es_simplified_invoice_number_efectivo_PI;
+              }else if (lines[0].name == "Efectivo Venecia (COP)") {
+                return prefix_ord+order.pos_session_id+"-0"+this.config.l10n_es_simplified_invoice_number_efectivo_venecia;
+              }else {
+                return prefix_ord+order.pos_session_id+"-0"+this.config.l10n_es_simplified_invoice_number_normal;
+              }
+            }else {
+              console.log("hay varios metodos de pago asi que rela");
+              console.log("por si las moscas dejo el number normal secuence para computar en caso tal");
+              return prefix_ord+order.pos_session_id+"-0"+this.config.l10n_es_simplified_invoice_number_normal;
+            }
+
         },
         get_padding_simple_inv: function (number) {
             var diff = this.config.l10n_es_simplified_invoice_padding - number.toString().length;
