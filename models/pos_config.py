@@ -65,25 +65,25 @@ class PosConfig(models.Model):
     )
     l10n_es_simplified_invoice_number_normal = fields.Integer(
         'Sim.Inv normal number',
-        readonly=False,
+        readonly=True,
         compute='_compute_simplified_invoice_sequence',
         oldname='simple_invoice_number',
     )
     l10n_es_simplified_invoice_number_efectivo_venecia = fields.Integer(
         'Secuencia efectivo venecia',
-        readonly=False,
+        readonly=True,
         compute='_compute_simplified_invoice_sequence',
         oldname='simple_invoice_number',
     )
     l10n_es_simplified_invoice_number_efectivo_CM = fields.Integer(
         'Secuencia efectivo centro mayor',
-        readonly=False,
+        readonly=True,
         compute='_compute_simplified_invoice_sequence',
         oldname='simple_invoice_number',
     )
     l10n_es_simplified_invoice_number_efectivo_PI = fields.Integer(
         'Secuencia efectivo plaza imperial',
-        readonly=False,
+        readonly=True,
         compute='_compute_simplified_invoice_sequence',
         oldname='simple_invoice_number',
     )
