@@ -90,19 +90,19 @@ odoo.define('l10n_es_pos.models', function (require) {
           validar_cupones();
                 this.pushed_normal_invoices.push(order.data.simplified_invoice);
                 if (number == 0) {
-                  ++this.config.l10n_es_simplified_invoice_number_normal;
+                  this.config.l10n_es_simplified_invoice_number_normal++;
                 } else if (number == 1) {
-                  ++this.config.l10l10n_es_simplified_invoice_number_efectivo_CM;
-                  console.log("aumentamos la secuencia de efectivo centro mayor");
+                  this.config.l10l10n_es_simplified_invoice_number_efectivo_CM++;
+                  console.log("aumentamos la secuencia de efectivo centro mayor? "+this.config.l10l10n_es_simplified_invoice_number_efectivo_CM);
                 } else if (number == 2) {
-                  ++this.config.l10l10n_es_simplified_invoice_number_efectivo_PI;
+                  this.config.l10l10n_es_simplified_invoice_number_efectivo_PI++;
                   console.log("aumentamos la secuencia de efectivo Plaza imperial");
                 } else if (number == 3) {
-                  ++this.config.l10n_es_simplified_invoice_number_efectivo_venecia;
+                  this.config.l10n_es_simplified_invoice_number_efectivo_venecia++;
                   console.log("aumentamos la secuencia de efectivo venecia");
                 }
 
-                console.log("aumentamos secuencia normal invoice");
+                console.log("salimos del comparador");
         },
         _flush_orders: function (orders, options) {
           console.log("entramos a metodo flush");
