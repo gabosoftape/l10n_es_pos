@@ -115,7 +115,7 @@ odoo.define('l10n_es_pos.models', function (require) {
               // console.log(lines[0].name + "hhhhhhhhhhhhhhhhhhhhhhhhh")
                 if (!order.data.to_invoice) {
                   console.log("entramos al if |no es una factura| .. comparando el data");
-                  if (lines.length == 1) {
+                  if (lines.length<=1) {
                     console.log("solo hay un medio de pago");
                   if (lines[0].name =="REDEBAN BCM (COP)") {
                       console.log("token BCM COP");
@@ -150,7 +150,7 @@ odoo.define('l10n_es_pos.models', function (require) {
                     console.log("OK, pushed. :P ... ojo , algo anda mal.. por favor revisa el codigo bro");
                   }
 
-              } else if (lines.length > 1 ){
+              } else {
                 console.log("!!!!!!!!!existen 2 o mas medios de pago .. por tal motivo haremos lo siguiente.");
                 console.log("token REDEBAN obligado");
                 self.push_simple_invoice(order);
