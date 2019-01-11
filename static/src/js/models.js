@@ -85,11 +85,23 @@ odoo.define('l10n_es_pos.models', function (require) {
                 console.log("aumentamos secuencia simplified invoice");
             }
         },
-        push_normal_invoice: function (order) {
+        push_normal_invoice: function (order, number) {
           console.log("pusheamos normal invoice");
           validar_cupones();
                 this.pushed_normal_invoices.push(order.data.simplified_invoice);
-                ++this.config.l10n_es_simplified_invoice_number_normal;
+                if (number == 0) {
+                  ++this.config.l10n_es_simplified_invoice_number_normal;
+                } else if (number == 1) {
+                  ++this.config.l10l10n_es_simplified_invoice_number_efectivo_CM;
+                  console.log("aumentamos la secuencia de efectivo centro mayor");
+                } else if (number == 2) {
+                  ++this.config.l10l10n_es_simplified_invoice_number_efectivo_PI;
+                  console.log("aumentamos la secuencia de efectivo Plaza imperial");
+                } else if (number == 3) {
+                  ++this.config.l10n_es_simplified_invoice_number_efectivo_venecia;
+                  console.log("aumentamos la secuencia de efectivo venecia");
+                }
+
                 console.log("aumentamos secuencia normal invoice");
         },
         _flush_orders: function (orders, options) {
@@ -116,11 +128,24 @@ odoo.define('l10n_es_pos.models', function (require) {
                     console.log("token venecia COP");
                     self.push_simple_invoice(order);
                     console.log("OK, pushed. :P");
-                  } else {
-                    console.log("token EFECTIVO");
-                    self.push_normal_invoice(order);
+                  } else if (lines[0].name =="Efectivo BCM (COP)") {
+                    console.log("token EFECTIVO CENTRO MAYOR");
+                    self.push_normal_invoice(order, 1);
                     console.log("OK, pushed. :P");
+                  } else if (lines[0].name =="Efectivo BPI (COP)") {
+                    console.log("token EFECTIVO PLAZA IMPERIAL");
+                    self.push_normal_invoice(order, 2);
+                    console.log("OK, pushed. :P");
+                  } else if (lines[0].name =="Efectivo Venecia (COP)") {
+                    console.log("token EFECTIVO VENECIA");
+                    self.push_normal_invoice(order, 3);
+                    console.log("OK, pushed. :P");
+                  } else {
+                    console.log("token EFECTIVO sin mas");
+                    self.push_normal_invoice(order, 0);
+                    console.log("OK, pushed. :P ... ojo , algo anda mal.. por favor revisa el codigo bro");
                   }
+
               } else {
                 console.log("!!!!!!!!!existen 2 o mas medios de pago .. por tal motivo haremos lo siguiente.");
                 console.log("token REDEBAN obligado");
@@ -153,9 +178,8 @@ odoo.define('l10n_es_pos.models', function (require) {
             flag = true;
         },
         set_normal_inv_number: function (flag) {
-          console.log("entramos al metodo set normal");
-          console.log("primero validamos que tipo de variable usaremos");
-          console.log("el medio de pago efectivo es: "+flag);
+          console.log("seteamos numero de orden"+flag);
+          this.simplified_invoice = this.pos.get_normal_inv_next_number();
           console.log("mostramos el nuevo numero de factura ... "+this.simplified_invoice);
           this.name = this.simplified_invoice;
           console.log("seteamos el numero anterior en order.name ... "+this.name);
