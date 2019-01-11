@@ -43,16 +43,16 @@ odoo.define('l10n_es_pos.models', function (require) {
             if (lines.length<=1) {
               console.log("solo hay un medio de pago EMPEZAMOS A VALIDAR LAS VARIABLES DE EFECTIVO");
               if (lines[0].name == "Efectivo BCM (COP)") {
-                console.log("el numero normal de la secuencia de orden es: "+this.config.l10n_es_simplified_invoice_number_efectivo_CM);
+                console.log("el numero normal de la secuencia BCM  de orden es: "+this.config.l10n_es_simplified_invoice_number_efectivo_CM);
                 return prefix_ord+order.pos_session_id+"-0"+this.config.l10n_es_simplified_invoice_number_efectivo_CM;
               }else if (lines[0].name == "Efectivo BPI (COP)") {
-                console.log("el numero normal de la secuencia de orden es: "+this.config.l10n_es_simplified_invoice_number_efectivo_PI);
+                console.log("el numero normal de la secuencia BPI de orden es: "+this.config.l10n_es_simplified_invoice_number_efectivo_PI);
                 return prefix_ord+order.pos_session_id+"-0"+this.config.l10n_es_simplified_invoice_number_efectivo_PI;
               }else if (lines[0].name == "Efectivo Venecia (COP)") {
-                console.log("el numero normal de la secuencia de orden es: "+this.config.l10n_es_simplified_invoice_number_efectivo_venecia);
+                console.log("el numero normal de la secuencia Venecia de orden es: "+this.config.l10n_es_simplified_invoice_number_efectivo_venecia);
                 return prefix_ord+order.pos_session_id+"-0"+this.config.l10n_es_simplified_invoice_number_efectivo_venecia;
               }else {
-                console.log("el numero normal de la secuencia de orden es: "+this.config.l10n_es_simplified_invoice_number_normal);
+                console.log("el numero normal de la secuencia null de orden es: "+this.config.l10n_es_simplified_invoice_number_normal);
                 return prefix_ord+order.pos_session_id+"-0"+this.config.l10n_es_simplified_invoice_number_normal;
               }
             }else {
