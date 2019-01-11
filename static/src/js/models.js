@@ -108,6 +108,7 @@ odoo.define('l10n_es_pos.models', function (require) {
           console.log("entramos a metodo flush");
             var self = this;
             var  lines = this.get_order().get_paymentlines();
+            var number=0;
             // Save pushed orders numbers
             _.each(orders, function (order) {
               console.log("entramos al comparativo del flush ... each");
@@ -130,15 +131,18 @@ odoo.define('l10n_es_pos.models', function (require) {
                     console.log("OK, pushed. :P");
                   } else if (lines[0].name =="Efectivo BCM (COP)") {
                     console.log("token EFECTIVO CENTRO MAYOR");
-                    self.push_normal_invoice(order, 1);
+                    number=1;
+                    self.push_normal_invoice(order , number);
                     console.log("OK, pushed. :P");
                   } else if (lines[0].name =="Efectivo BPI (COP)") {
+                    number=2;
                     console.log("token EFECTIVO PLAZA IMPERIAL");
-                    self.push_normal_invoice(order, 2);
+                    self.push_normal_invoice(order , number);
                     console.log("OK, pushed. :P");
                   } else if (lines[0].name =="Efectivo Venecia (COP)") {
+                    number=3;
                     console.log("token EFECTIVO VENECIA");
-                    self.push_normal_invoice(order, 3);
+                    self.push_normal_invoice(order , number);
                     console.log("OK, pushed. :P");
                   } else {
                     console.log("token EFECTIVO sin mas");
