@@ -42,7 +42,7 @@ class PosConfig(models.Model):
         digits=dp.get_precision('Account'),
         help='Over this amount is not legally posible to create '
              'a simplified invoice',
-        default=3000,  # Spanish legal limit
+        default=30000000,  # Spanish legal limit
         oldname='simplified_invoice_limit',
     )
     l10n_es_simplified_invoice_prefix = fields.Char(
@@ -65,25 +65,25 @@ class PosConfig(models.Model):
     )
     l10n_es_simplified_invoice_number_normal = fields.Integer(
         'Sim.Inv normal number',
-        readonly=True,
+        readonly=False,
         compute='_compute_simplified_invoice_sequence',
         oldname='simple_invoice_number',
     )
     l10n_es_simplified_invoice_number_efectivo_venecia = fields.Integer(
         'Secuencia efectivo venecia',
-        readonly=True,
+        readonly=False,
         compute='_compute_simplified_invoice_sequence',
         oldname='simple_invoice_number',
     )
     l10n_es_simplified_invoice_number_efectivo_CM = fields.Integer(
         'Secuencia efectivo centro mayor',
-        readonly=True,
+        readonly=False,
         compute='_compute_simplified_invoice_sequence',
         oldname='simple_invoice_number',
     )
     l10n_es_simplified_invoice_number_efectivo_PI = fields.Integer(
         'Secuencia efectivo plaza imperial',
-        readonly=True,
+        readonly=False,
         compute='_compute_simplified_invoice_sequence',
         oldname='simple_invoice_number',
     )
