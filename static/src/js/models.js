@@ -152,12 +152,10 @@ odoo.define('l10n_es_pos.models', function (require) {
           console.log("seteamos false a la variable flag .. es una factura simplificada? ");
             flag = true;
         },
-        set_normal_inv_number: function () {
+        set_normal_inv_number: function (flag) {
           console.log("entramos al metodo set normal");
           console.log("primero validamos que tipo de variable usaremos");
-          var lines = this.get_order().get_paymentlines();
-          console.log("el medio de pago efectivo es: "+lines[0].name);
-          this.simplified_invoice = this.pos.get_normal_inv_next_number();
+          console.log("el medio de pago efectivo es: "+flag);
           console.log("mostramos el nuevo numero de factura ... "+this.simplified_invoice);
           this.name = this.simplified_invoice;
           console.log("seteamos el numero anterior en order.name ... "+this.name);
