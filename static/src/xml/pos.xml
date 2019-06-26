@@ -4,7 +4,7 @@
     <t t-extend="PosTicket">
         <t t-jquery="t[t-esc='order.name']" t-operation="before">
             <t t-if="widget.pos.config.iface_l10n_es_simplified_invoice and !order.is_to_invoice()">
-                <br/><span>Simplified invoice: </span>
+                <br/><span>Factura No. </span>
             </t>
         </t>
         <t t-jquery="t[t-esc='widget.pos.company.name']" t-operation="after">
@@ -37,9 +37,9 @@
         </t>
         <t t-jquery=".receipt-orderlines colgroup" t-operation="replace">
             <thead>
-                <th>Product</th>
-                <th class="pos-right-align">Qty</th>
-                <th class="pos-right-align">Unit</th>
+                <th>Productos</th>
+                <th class="pos-right-align">Cantidad</th>
+                <th class="pos-right-align">Unidad</th>
                 <th class="pos-right-align">Subt</th>
             </thead>
         </t>
@@ -57,7 +57,7 @@
         <t t-jquery="[t-if='!receipt.company.logo']" t-operation="after">
             <t t-if="widget.pos.config.iface_l10n_es_simplified_invoice and !order.is_to_invoice()">
             <br/>
-                Simplified invoice <t t-esc="order.simplified_invoice"/>
+                Factura No. <t t-esc="order.simplified_invoice"/>
             <br/>
             </t>
         </t>
