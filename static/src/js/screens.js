@@ -27,7 +27,7 @@ odoo.define('l10n_es_pos.screens', function (require) {
                         } 
                         else {
                             var count = 1
-                            if (count = 10){
+                            if (count == 10){
                              order.set_simple_inv_number();   
                              count = 1   
                              console.log("Venta añadida");
