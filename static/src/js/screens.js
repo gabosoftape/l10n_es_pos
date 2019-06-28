@@ -30,10 +30,12 @@ odoo.define('l10n_es_pos.screens', function (require) {
                             if (count = 10){
                              order.set_simple_inv_number();   
                              count = 1   
+                             console.log("Venta añadida");
                             } 
                             else { 
                                order.to_invoice = true; 
                                count++;
+                               console.log("Venta Omitida");
                             }
                         }
                     }
