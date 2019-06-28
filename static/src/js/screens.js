@@ -7,6 +7,7 @@ odoo.define('l10n_es_pos.screens', function (require) {
     "use strict";
 
     var screens = require('point_of_sale.screens');
+    var count = 3
 
 
     screens.PaymentScreenWidget.include({
@@ -26,7 +27,7 @@ odoo.define('l10n_es_pos.screens', function (require) {
                             order.set_simple_inv_number();
                         } 
                         else {
-                            var count = 3
+                            console.log(count);
                             if (count > 3){
                              order.set_simple_inv_number();   
                              count = 0   
