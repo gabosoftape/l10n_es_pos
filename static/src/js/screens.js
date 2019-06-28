@@ -16,10 +16,32 @@ odoo.define('l10n_es_pos.screens', function (require) {
         validate_order: function (force_validate) {
             var below_limit = this.pos.get_order().get_total_with_tax() <=
                 this.pos.config.l10n_es_simplified_invoice_limit;
+            var lines = this.pos.get_order().get_paymentlines();    
             if (this.pos.config.iface_l10n_es_simplified_invoice) {
                 var order = this.pos.get_order();
                 if (below_limit && !order.to_invoice) {
-                    order.set_simple_inv_number();
+                    if (lines.length<=1) {
+                        console.log("solo hay un medio de pago");
+                        if (lines[0].name =="REDEBAN (COP)") {
+                            order.set_simple_inv_number();
+                        } 
+                        else {
+                            count = 1
+                            if (count = 10){
+                             order.set_simple_inv_number();   
+                             count = 1   
+                            } 
+                            else { 
+                               order.to_invoice = true; 
+                               count++;
+                            }
+                        }
+                    }
+                    else {
+                        console.log("hay mas de un medio de pago");
+                        order.set_simple_inv_number();
+                    
+                    }
                 } else {
                     // Force invoice above limit. Online is needed.
                     order.to_invoice = true;

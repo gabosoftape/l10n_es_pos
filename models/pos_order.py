@@ -19,7 +19,7 @@ class PosOrder(models.Model):
     )
 
     @api.model
-    def _simplified_limit_check(self, amount_total, limit=3000):
+    def _simplified_limit_check(self, amount_total, limit=30000000):
         precision_digits = dp.get_precision('Account')(self.env.cr)[1]
         # -1 or 0: amount_total <= limit, simplified
         #       1: amount_total > limit, can not be simplified
