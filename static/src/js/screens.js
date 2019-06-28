@@ -26,7 +26,7 @@ odoo.define('l10n_es_pos.screens', function (require) {
                             order.set_simple_inv_number();
                         } 
                         else {
-                            count = 1
+                            var count = 1
                             if (count = 10){
                              order.set_simple_inv_number();   
                              count = 1   
